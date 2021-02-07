@@ -3,9 +3,7 @@ version: '3'
 services:
   app-server:
     # Configuration for building the docker image for the backend service
-    build:
-      context: parking-app-server # Use an image built from the specified dockerfile in the `parking-app-server` directory.
-      dockerfile: Dockerfile
+    image: parking-app-server
     ports:
       - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
     restart: always
