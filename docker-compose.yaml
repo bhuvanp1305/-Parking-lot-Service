@@ -1,6 +1,23 @@
 version: '3'
 
 services:
+  app-server:
+    # Configuration for building the docker image for the backend service
+    build:
+      context: parking-app-server # Use an image built from the specified dockerfile in the `parking-app-server` directory.
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    restart: always
+    depends_on: 
+      - db # This service depends on mysql. Start that first.
+    environment: # Pass environment variables to the service
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/parking_lot?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - backend
+
   zookeeper1:
     image: wurstmeister/zookeeper
     ports:
@@ -30,6 +47,13 @@ services:
       - '3307'
     volumes:
       - my-db:/var/lib/mysql
+    networks:
+      - backend
+
 # Names our volume
 volumes:
   my-db:
+  
+# Networks to be created to facilitate communication between containers
+networks:
+  backend:
