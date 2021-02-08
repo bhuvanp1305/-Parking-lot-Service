@@ -5,7 +5,7 @@
 	Step 1: Run "git clone https://github.com/bhuvanp1305/Parking-lot.git" and 
 				run Step 2 to 4 inside of Cloned Parking-lot project
 	Step 2: Run "chmod +x mvnw mvnw.cmd"
-	Step 3: Run "docker build -t parking-app-server"
+	Step 3: Run "docker build --no-cache -t parking-app-server . "
 	Step 4: Run "docker-compose up"
 	Step 5: Add at-least 3 Parking slots one by one (e.g. Parking 1, Parking 2, Parking 3 ....):
 			URL: 
